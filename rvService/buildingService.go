@@ -6,11 +6,19 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
+var tables = map[string]string{
+	"bk": "service_request_311_bk",
+	"mn": "service_request_311_mn",
+	"qn": "service_request_311_qn",
+	"bx": "service_request_311_bx",
+	"si": "service_request_311_si",
+}
+
 func panic(err string) {
 	fmt.Println(err)
 }
 
-func GetComplaints() {
+func GetComplaints(address, borough string) {
 	db, err := sql.Open("mysql", "root:root@tcp(127.0.0.1:8889)/rv")
 	if err != nil {
 		panic(err.Error()) // Just for example purpose. You should use proper error handling instead of panic
@@ -18,10 +26,9 @@ func GetComplaints() {
 	defer db.Close()
 
 	// Execute the query
-	table := "service_request_311_bk"
+	table := tables[borough]
 	key := "IncidentAddress"
 	tableColumns := "*"
-	address := "311 HENRY STREET"
 
 	query := "SELECT " + tableColumns + " FROM " + table + " WHERE " + key + " = '" + address + "'"
 	rows, err := db.Query(query)

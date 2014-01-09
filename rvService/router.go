@@ -26,7 +26,7 @@ func findBuilding(request *restful.Request, response *restful.Response) {
 	borough := request.PathParameter("borough")
 
 	// here you would fetch user from some persistence system
-	GetComplaints()
+	GetComplaints(address, borough)
 
 	bldg := &Building{Address: address, Borough: borough, Status: "Ruhl Deece"}
 	response.WriteEntity(bldg)
