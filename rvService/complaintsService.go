@@ -6,7 +6,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-var tables = map[string]string{
+var complaint_tables = map[string]string{
 	"bk": "service_request_311_bk",
 	"mn": "service_request_311_mn",
 	"qn": "service_request_311_qn",
@@ -18,7 +18,7 @@ func panic(err string) {
 	fmt.Println(err)
 }
 
-func GetComplaints(address, borough string) {
+func GetComplaints(address, borough string) []map[string]interface{} {
 	db, err := sql.Open("mysql", "root:root@tcp(127.0.0.1:8889)/rv")
 	if err != nil {
 		panic(err.Error()) // Just for example purpose. You should use proper error handling instead of panic
@@ -26,7 +26,7 @@ func GetComplaints(address, borough string) {
 	defer db.Close()
 
 	// Execute the query
-	table := tables[borough]
+	table := complaint_tables[borough]
 	key := "IncidentAddress"
 	tableColumns := "*"
 
@@ -53,6 +53,8 @@ func GetComplaints(address, borough string) {
 		scanArgs[i] = &values[i]
 	}
 
+	var results []map[string]interface{}
+
 	// Fetch rows
 	for rows.Next() {
 		// get RawBytes from data
@@ -62,7 +64,8 @@ func GetComplaints(address, borough string) {
 		}
 
 		// Now do something with the data.
-		// Here we just print each column as a string.
+		//@TODO return proper types, not just strings.
+		record := make(map[string]interface{})
 		var value string
 		for i, col := range values {
 			// Here we can check if the value is nil (NULL value)
@@ -71,8 +74,9 @@ func GetComplaints(address, borough string) {
 			} else {
 				value = string(col)
 			}
-			fmt.Println(columns[i], ": ", value)
+			record[columns[i]] = value
 		}
-		fmt.Println("-----------------------------------")
+		results = append(results, record)
 	}
+	return results
 }
