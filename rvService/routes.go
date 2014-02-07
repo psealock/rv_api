@@ -11,7 +11,7 @@ func New() *restful.WebService {
 		Consumes(restful.MIME_JSON, restful.MIME_XML).
 		Produces(restful.MIME_JSON, restful.MIME_XML)
 
-	service.Route(service.GET("building/{address}/{borough}").To(FindBuilding))
+	service.Route(service.GET("complaints/{address}/{borough}").To(FindBuilding))
 
 	return service
 }
