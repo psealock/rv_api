@@ -7,11 +7,11 @@ import (
 )
 
 var complaint_tables = map[string]string{
-	"bk": "service_request_311_bk",
-	"mn": "service_request_311_mn",
-	"qn": "service_request_311_qn",
-	"bx": "service_request_311_bx",
-	"si": "service_request_311_si",
+	"Brooklyn":      "service_request_311_bk",
+	"Manhattan":     "service_request_311_mn",
+	"Queens":        "service_request_311_qn",
+	"Bronx":         "service_request_311_bx",
+	"Staten Island": "service_request_311_si",
 }
 
 func panic(err string) {
