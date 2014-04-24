@@ -7,11 +7,11 @@ import (
 )
 
 var complaint_tables = map[string]string{
-	"Brooklyn":      "service_request_311_bk",
-	"Manhattan":     "service_request_311_mn",
-	"Queens":        "service_request_311_qn",
-	"Bronx":         "service_request_311_bx",
-	"Staten Island": "service_request_311_si",
+	"bk": "service_request_311_bk",
+	"mn": "service_request_311_mn",
+	"qn": "service_request_311_qn",
+	"bx": "service_request_311_bx",
+	"si": "service_request_311_si",
 }
 
 func panic(err string) {
@@ -30,7 +30,7 @@ func GetComplaints(address, borough string) []map[string]interface{} {
 	key := "IncidentAddress"
 	tableColumns := "*"
 
-	query := "SELECT " + tableColumns + " FROM " + table + " WHERE " + key + " = '" + address + "'"
+	query := "SELECT " + tableColumns + " FROM " + table + " WHERE " + key + " = \"" + address + "\""
 	rows, err := db.Query(query)
 	if err != nil {
 		panic(err.Error()) // proper error handling instead of panic in your app
