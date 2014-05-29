@@ -1,7 +1,7 @@
 package main
 
 import (
-	"bitbucket.org/psealock/rv/rvService"
+	"bitbucket.org/psealock/rv_api/rvService"
 	"github.com/emicklei/go-restful"
 	"log"
 	"net/http"
