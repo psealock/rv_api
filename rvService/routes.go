@@ -11,7 +11,11 @@ func New() *restful.WebService {
 		Consumes(restful.MIME_JSON, restful.MIME_XML).
 		Produces(restful.MIME_JSON, restful.MIME_XML)
 
-	service.Route(service.GET("complaints/{address}/{borough}").To(FindBuilding))
+	service.Route(service.GET("311/{address}/{borough}").To(HandleServiceRequest))
+
+	service.Route(service.GET("dob/{bin}").To(HandleDobComplaint))
+
+	service.Route(service.GET("pluto/{bbl}/{borough}").To(HandlePluto))
 
 	return service
 }

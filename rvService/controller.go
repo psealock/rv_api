@@ -4,12 +4,32 @@ import (
 	"github.com/emicklei/go-restful"
 )
 
-func FindBuilding(request *restful.Request, response *restful.Response) {
-	Console("fetching results...")
+func HandleServiceRequest(request *restful.Request, response *restful.Response) {
+	Console("fetching 311...")
 	address := request.PathParameter("address")
 	borough := request.PathParameter("borough")
 
-	//grab array of complaints.
-	cmplnt := GetComplaints(address, borough)
+	//grab array of service requests.
+	cmplnt := GetServiceRequest(address, borough)
 	response.WriteEntity(cmplnt)
+}
+
+func HandleDobComplaint(request *restful.Request, response *restful.Response) {
+	Console("fetching DoB...")
+	bin := request.PathParameter("bin")
+
+	//grab array of dob complaints
+	dob := GetDobComplaint(bin)
+	response.WriteEntity(dob)
+}
+
+func HandlePluto(request *restful.Request, response *restful.Response) {
+	Console("fetching Pluto...")
+
+	bbl := request.PathParameter("bbl")
+	borough := request.PathParameter("borough")
+
+	//grab pluto
+	pluto := GetPluto(bbl, borough)
+	response.WriteEntity(pluto)
 }
