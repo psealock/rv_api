@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	rvService.Console("Listening on port:8080")
+	rvService.Console("Listening on port:8888")
 	restful.Add(rvService.New())
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Fatal(http.ListenAndServe(":8888", nil))
 }
