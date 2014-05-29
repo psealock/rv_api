@@ -19,7 +19,7 @@ func panic(err string) {
 }
 
 func GetComplaints(address, borough string) []map[string]interface{} {
-	db, err := sql.Open("mysql", "root:root@tcp(127.0.0.1:8889)/rv")
+	db, err := sql.Open("mysql", "rv:12345678@tcp(107.170.173.75:3306)/rv")
 	if err != nil {
 		panic(err.Error()) // Just for example purpose. You should use proper error handling instead of panic
 	}
