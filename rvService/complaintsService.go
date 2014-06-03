@@ -47,3 +47,14 @@ func GetPluto(bbl, borough string) []map[string]interface{} {
 
 	return DB(query)
 }
+
+func GetAll(address, borough, bin, bbl string) map[string]interface{} {
+	//@TODO: Make these queries run concurrently with goroutines
+	record := make(map[string]interface{})
+
+	record["serviceRequests"] = GetServiceRequest(address, borough)
+	record["dobComplaints"] = GetDobComplaint(bin)
+	record["pluto"] = GetPluto(bbl, borough)
+
+	return record
+}

@@ -17,5 +17,7 @@ func New() *restful.WebService {
 
 	service.Route(service.GET("pluto/{bbl}/{borough}").To(HandlePluto))
 
+	service.Route(service.GET("all/{address}/{borough}/{bin}/{bbl}").To(HandleAll))
+
 	return service
 }

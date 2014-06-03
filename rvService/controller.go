@@ -33,3 +33,16 @@ func HandlePluto(request *restful.Request, response *restful.Response) {
 	pluto := GetPluto(bbl, borough)
 	response.WriteEntity(pluto)
 }
+
+func HandleAll(request *restful.Request, response *restful.Response) {
+	Console("fetching All...")
+
+	address := request.PathParameter("address")
+	borough := request.PathParameter("borough")
+	bin := request.PathParameter("bin")
+	bbl := request.PathParameter("bbl")
+
+	//grab all
+	all := GetAll(address, borough, bin, bbl)
+	response.WriteEntity(all)
+}
